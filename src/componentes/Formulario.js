@@ -4,6 +4,9 @@ import Criptomoneda from './Criptomoneda';
 
 function Formulario(){
 const [criptomonedas, guardarCriptomonedas ] = useState ([]);
+const [monedaCotizar, guardarMonedaCotizar ] = useState ('');
+const [criptoCotizar, guardarCriptoCotizar ] = useState ('');
+const [error, guardarError] = useState (false);
 
         useEffect(() => {
                 const constultarAPI = async () => {
@@ -16,11 +19,14 @@ const [criptomonedas, guardarCriptomonedas ] = useState ([]);
                 constultarAPI();
         }, []);
 
+
+
     return(<form>
         <div className="row">
             <label>Elige tu moneda</label>
             <select
             className="u-full-width"
+            onChange={e => guardarMonedaCotizar(e.target.value)}
             >
                 <option value="">-Elige tu moneda -</option>
                 <option value="USD">Dolar Estadounidense</option>
@@ -33,7 +39,10 @@ const [criptomonedas, guardarCriptomonedas ] = useState ([]);
             <label>Elige tu Criptomoneda</label>
             <select
             className="u-full-width"
+            onChange={e => guardarCriptoCotizar(e.target.value)}
             >
+            <option value="">-Elige tu Criptomoneda -</option>
+
             {criptomonedas.map(criptomoneda => (
                 <Criptomoneda
                 key={criptomoneda.CoinInfo.Id}
